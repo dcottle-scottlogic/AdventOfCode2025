@@ -10,7 +10,8 @@ import (
 
 func main() {
 	fmt.Println("Welcome to Advent of Code 2025!")
-	fmt.Printf("Our mascot is the %s.\n", mascot.GetMascot())
+	var ourMascot = mascot.GetMascot()
+	fmt.Printf("Our mascot is the %s a %s.\n", ourMascot.GetMascotName(), ourMascot.GetMascotType())
 	fmt.Println("----------------------")
 	fmt.Println(adventOfCodeDay1.Day1Main())
 }
