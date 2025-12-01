@@ -1,26 +1,21 @@
 package adventOfCodeDay1
 
 import (
-	"bufio"
 	"log"
-	"os"
 	"strconv"
 	"strings"
+
+	"example.com/AdventOfCode2025/utils"
 )
 
 //how many times does the dial point to 0
 
 func Day1Main() string {
-	file, err := os.Open("Day1/part1Input.txt")
-	if err != nil {
-		log.Fatalf("Could not open file: %v", err)
-	}
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
+	scanner := utils.FileScanner("Day1/part1Input.txt")
 	location := 50
 	totalDefaults := 0
-	for scanner.Scan() {
-		var direction string
+	for scanner.Scan() { // Read each line
+		var direction string = ""
 		var clicks int
 		line := scanner.Text()
 		splints := strings.Split(line, "L")
@@ -37,8 +32,7 @@ func Day1Main() string {
 		for i := 0; i < clicks; i++ {
 			if direction == "Left" {
 				location--
-			}
-			if direction == "Right" {
+			} else {
 				location++
 			}
 			if location <= -1 {
@@ -47,11 +41,19 @@ func Day1Main() string {
 			if location >= 100 {
 				location = 0
 			}
+			//For part 2 only
+			if location == 0 {
+				totalDefaults++
+			}
 
 		}
-		if location == 0 {
-			totalDefaults++
-		}
+		//For part 1 only
+		// if location == 0 {
+		// 	totalDefaults++
+		// }
+
+		//Part 1 answer = 1074
+		//Part 2 answer = 6254
 	}
 	if err := scanner.Err(); err != nil {
 		log.Fatalf("Error occurred during scanning: %v", err)
