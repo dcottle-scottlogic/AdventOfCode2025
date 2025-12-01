@@ -3,7 +3,6 @@ package adventOfCodeDay1
 import (
 	"log"
 	"strconv"
-	"strings"
 
 	"example.com/AdventOfCode2025/utils"
 )
@@ -13,21 +12,24 @@ func Day1Main(isPart1 bool) string {
 	scanner := utils.FileScanner("Day1/part1Input.txt")
 	location := 50
 	totalDefaults := 0
+
 	for scanner.Scan() {
 		var isCounterClockwise bool
 		var clicks int
 		line := scanner.Text()
-		splints := strings.Split(line, "L")
-		if len(splints) > 1 {
+		clickString := line[1:]
+
+		if line[0] == 'L' {
 			isCounterClockwise = true
 		} else {
 			isCounterClockwise = false
-			splints = strings.Split(splints[0], "R")
 		}
-		clicks, error := strconv.Atoi(splints[1])
+
+		clicks, error := strconv.Atoi(clickString)
 		if error != nil {
 			log.Fatalf("Could not convert to integer: %v", error)
 		}
+
 		for i := 0; i < clicks; i++ {
 			if isCounterClockwise {
 				location--
