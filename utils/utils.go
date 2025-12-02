@@ -13,3 +13,7 @@ func FileScanner(filePath string) *bufio.Scanner {
 	}
 	return bufio.NewScanner(file)
 }
+
+func IsEven(num int) bool {
+	return num%2 == 0
+}
