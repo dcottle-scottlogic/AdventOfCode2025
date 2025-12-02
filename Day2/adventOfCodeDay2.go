@@ -14,14 +14,14 @@ func GetDay2Input() []string {
 	return inputList
 }
 
-type Result struct {
+type Day2Result struct {
 	runningTotal int
 }
 
-func (r *Result) AddToTotal(value int) {
+func (r *Day2Result) AddToTotal(value int) {
 	r.runningTotal += value
 }
-func (r *Result) Part1HandleInvalidIDPair(idPair string) {
+func (r *Day2Result) Part1HandleInvalidIDPair(idPair string) {
 	var splitIds []string = strings.Split(idPair, "-")
 	var idStart, _ = strconv.Atoi(splitIds[0])
 	var idEnd, _ = strconv.Atoi(splitIds[1])
@@ -37,7 +37,7 @@ func (r *Result) Part1HandleInvalidIDPair(idPair string) {
 		}
 	}
 }
-func (r *Result) Part2HandleInvalidIDPair(idPair string) {
+func (r *Day2Result) Part2HandleInvalidIDPair(idPair string) {
 	var splitIds []string = strings.Split(idPair, "-")
 	var idStart, _ = strconv.Atoi(splitIds[0])
 	var idEnd, _ = strconv.Atoi(splitIds[1])
@@ -56,12 +56,12 @@ func (r *Result) Part2HandleInvalidIDPair(idPair string) {
 
 	}
 }
-func (r *Result) GetTotal() int {
+func (r *Day2Result) GetTotal() int {
 	return r.runningTotal
 }
 
 func Day2Main(isPart1 bool, input []string) string {
-	newResult := Result{runningTotal: 0}
+	newResult := Day2Result{runningTotal: 0}
 	fmt.Println("Starting Day 2 Computation")
 	var wg sync.WaitGroup
 	for i := range input {
