@@ -4,7 +4,7 @@ import (
 	"log"
 	"strconv"
 
-	"example.com/AdventOfCode2025/utils"
+	"AdventOfCode2025/utils"
 )
 
 func Day1Main(isPart1 bool) string {
