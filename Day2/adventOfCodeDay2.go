@@ -2,9 +2,9 @@ package adventOfCodeDay2
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
+	"sync"
 
 	"AdventOfCode2025/utils"
 )
@@ -14,22 +14,14 @@ func GetDay2Input() []string {
 	return inputList
 }
 
-func Day2Main(isPart1 bool, input []string) string {
-	var InvalidRunningTotal int = 0
-	fmt.Println("Starting Day 2 Computation")
-	for i := range input {
-		var idPair string = input[i]
-		if isPart1 {
-			InvalidRunningTotal = InvalidRunningTotal + isInvalidIDPart1(idPair)
-		} else {
-			InvalidRunningTotal = InvalidRunningTotal + isInvalidIDPart2(idPair)
-		}
-	}
-	return strconv.Itoa(InvalidRunningTotal)
+type Result struct {
+	runningTotal int
 }
 
-func isInvalidIDPart1(idPair string) int {
-	var totalInvalidIDs int = 0
+func (r *Result) AddToTotal(value int) {
+	r.runningTotal += value
+}
+func (r *Result) Part1HandleInvalidIDPair(idPair string) {
 	var splitIds []string = strings.Split(idPair, "-")
 	var idStart, _ = strconv.Atoi(splitIds[0])
 	var idEnd, _ = strconv.Atoi(splitIds[1])
@@ -39,19 +31,13 @@ func isInvalidIDPart1(idPair string) int {
 			var string1 string = id[0 : len(id)/2]
 			var string2 string = id[len(id)/2:]
 			if string1 == string2 {
-				idNum, error := strconv.Atoi(id)
-				if error != nil {
-					log.Fatalf("Could not convert to integer: %v", error)
-				}
-				totalInvalidIDs = totalInvalidIDs + idNum
+				idNum, _ := strconv.Atoi(id)
+				r.AddToTotal(idNum)
 			}
 		}
 	}
-	return totalInvalidIDs
 }
-
-func isInvalidIDPart2(idPair string) int {
-	var totalInvalidIDs int = 0
+func (r *Result) Part2HandleInvalidIDPair(idPair string) {
 	var splitIds []string = strings.Split(idPair, "-")
 	var idStart, _ = strconv.Atoi(splitIds[0])
 	var idEnd, _ = strconv.Atoi(splitIds[1])
@@ -62,12 +48,30 @@ func isInvalidIDPart2(idPair string) int {
 			var string2 string = id[j:]
 			string2 = strings.Replace(string2, string1, "", -1)
 			if len(string2) == 0 {
-				totalInvalidIDs = totalInvalidIDs + i
+				r.AddToTotal(i)
 				break
 			}
 
 		}
 
 	}
-	return totalInvalidIDs
+}
+func (r *Result) GetTotal() int {
+	return r.runningTotal
+}
+
+func Day2Main(isPart1 bool, input []string) string {
+	newResult := Result{runningTotal: 0}
+	fmt.Println("Starting Day 2 Computation")
+	var wg sync.WaitGroup
+	for i := range input {
+		var idPair string = input[i]
+		if isPart1 {
+			wg.Go(func() { newResult.Part1HandleInvalidIDPair(idPair) })
+		} else {
+			wg.Go(func() { newResult.Part2HandleInvalidIDPair(idPair) })
+		}
+	}
+	wg.Wait()
+	return strconv.Itoa(newResult.GetTotal())
 }
