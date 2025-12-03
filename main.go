@@ -5,6 +5,7 @@ import (
 
 	adventOfCodeDay1 "AdventOfCode2025/Day1"
 	adventOfCodeDay2 "AdventOfCode2025/Day2"
+	adventOfCodeDay3 "AdventOfCode2025/Day3"
 	"AdventOfCode2025/mascot"
 )
 
@@ -20,4 +21,9 @@ func main() {
 	fmt.Println("Day 2 Solution:")
 	fmt.Println("The result for part one is: " + adventOfCodeDay2.Day2Main(true, adventOfCodeDay2.GetDay2Input()))
 	fmt.Println("The result for part two is: " + adventOfCodeDay2.Day2Main(false, adventOfCodeDay2.GetDay2Input()))
+	fmt.Println("----------------------")
+	fmt.Println("Day 3 Solution:")
+	fmt.Printf("The result for part one is: %v", adventOfCodeDay3.Day3Main(true, adventOfCodeDay3.GetDay3Input()))
+	fmt.Printf("The result for part two is: %v", adventOfCodeDay3.Day3Main(false, adventOfCodeDay3.GetDay3Input()))
+
 }
