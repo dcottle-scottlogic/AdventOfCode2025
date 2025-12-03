@@ -66,3 +66,35 @@ func day3Part2(input string) int {
 	}
 	return totalJoltage
 }
+
+func RunRecursiveExample(input string) int {
+	totalJoltage := 0
+	scanner := utils.FileScanner(input)
+	for scanner.Scan() {
+		line := scanner.Text()
+		lineCharArray := strings.Split(line, "")
+
+		totalJoltage += utils.ToInt(strings.Join(day3Part2Recursive(lineCharArray, 12), ""))
+	}
+	return totalJoltage
+}
+
+func day3Part2Recursive(input []string, bankSize int) []string {
+
+	lineCharArray := input
+	if len(lineCharArray) > bankSize {
+		var currentPointer = len(lineCharArray) - 1
+		for j := 0; j <= len(lineCharArray)-2; j++ {
+			currentInt := utils.ToInt(lineCharArray[j])
+			nextInt := utils.ToInt(lineCharArray[j+1])
+			if currentInt < nextInt {
+				currentPointer = j
+				break
+			}
+		}
+		lineCharArray = append(lineCharArray[:currentPointer], lineCharArray[currentPointer+1:]...)
+
+		return day3Part2Recursive(lineCharArray, bankSize)
+	}
+	return lineCharArray
+}

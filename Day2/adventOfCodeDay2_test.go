@@ -2,8 +2,7 @@ package adventOfCodeDay2
 
 import "testing"
 
-var exampleList = []string{"38593856-38593862", "446443-446449", "1698522-1698528", "222220-222224", "1188511880-1188511890", "998-1012", "95-115", "11-22", "565653-565659",
-	"824824821-824824827", "2121212118-2121212124"}
+var exampleList = []string{}
 
 func TestDay2MainPart1(t *testing.T) {
 	got := Day2Main(true, exampleList)

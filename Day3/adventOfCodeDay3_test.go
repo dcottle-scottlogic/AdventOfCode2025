@@ -17,3 +17,10 @@ func TestDay3MainPart2(t *testing.T) {
 		t.Errorf("Day2Main() = %v, want %v", got, want)
 	}
 }
+func TestDay3recursiveExample(t *testing.T) {
+	got := RunRecursiveExample("C:/Dev/AdventOfCode/AdventOfCode2025/Day3/testData.txt")
+	want := 3121910778619
+	if got != want {
+		t.Errorf("Day2Main() = %v, want %v", got, want)
+	}
+}
