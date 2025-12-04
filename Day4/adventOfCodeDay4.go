@@ -28,31 +28,31 @@ func Day4Main(isPart1 bool, dataPath string, height int) int {
 }
 
 func checkRows(isPart1 bool, ourMap [][]string) (int, [][]string) {
-	totalAccessibleValues := 0
+	totalAccessibleRolls := 0
 	for rowIndex := 0; rowIndex < len(ourMap); rowIndex++ {
 		for columnIndex := 0; columnIndex < len(ourMap[rowIndex]); columnIndex++ {
 			currentRowValue := ourMap[rowIndex][columnIndex]
 			if currentRowValue == "@" {
-				adjacentToiletRolls := 0
+				adjacentPaperRolls := 0
 				for x := -1; x < 2; x++ {
 					for y := -1; y < 2; y++ {
 						if x == 0 && y == 0 {
 							continue
 						}
-						adjacentToiletRolls += checkLocation(ourMap, rowIndex+x, columnIndex+y)
+						adjacentPaperRolls += checkLocation(ourMap, rowIndex+x, columnIndex+y)
 
 					}
 				}
-				if adjacentToiletRolls < 4 {
+				if adjacentPaperRolls < 4 {
 					if !isPart1 {
 						ourMap[rowIndex][columnIndex] = "X"
 					}
-					totalAccessibleValues++
+					totalAccessibleRolls++
 				}
 			}
 		}
 	}
-	return totalAccessibleValues, ourMap
+	return totalAccessibleRolls, ourMap
 }
 
 func checkLocation(ourMap [][]string, rowIndex int, columnIndex int) int {
