@@ -28,30 +28,31 @@ func Day4Main(isPart1 bool, dataPath string, height int) int {
 }
 
 func checkRows(isPart1 bool, ourMap [][]string) (int, [][]string) {
-	totalAccessableValues := 0
+	totalAccessibleValues := 0
 	for rowIndex := 0; rowIndex < len(ourMap); rowIndex++ {
 		for columnIndex := 0; columnIndex < len(ourMap[rowIndex]); columnIndex++ {
 			currentRowValue := ourMap[rowIndex][columnIndex]
 			if currentRowValue == "@" {
 				adjacentToiletRolls := 0
-				adjacentToiletRolls += checkLocation(ourMap, rowIndex-1, columnIndex)   // left
-				adjacentToiletRolls += checkLocation(ourMap, rowIndex+1, columnIndex)   // right
-				adjacentToiletRolls += checkLocation(ourMap, rowIndex, columnIndex-1)   // up
-				adjacentToiletRolls += checkLocation(ourMap, rowIndex, columnIndex+1)   // down
-				adjacentToiletRolls += checkLocation(ourMap, rowIndex-1, columnIndex+1) // down left
-				adjacentToiletRolls += checkLocation(ourMap, rowIndex+1, columnIndex+1) // down right
-				adjacentToiletRolls += checkLocation(ourMap, rowIndex-1, columnIndex-1) // up left
-				adjacentToiletRolls += checkLocation(ourMap, rowIndex+1, columnIndex-1) // up right
+				for x := -1; x < 2; x++ {
+					for y := -1; y < 2; y++ {
+						if x == 0 && y == 0 {
+							continue
+						}
+						adjacentToiletRolls += checkLocation(ourMap, rowIndex+x, columnIndex+y)
+
+					}
+				}
 				if adjacentToiletRolls < 4 {
 					if !isPart1 {
 						ourMap[rowIndex][columnIndex] = "X"
 					}
-					totalAccessableValues++
+					totalAccessibleValues++
 				}
 			}
 		}
 	}
-	return totalAccessableValues, ourMap
+	return totalAccessibleValues, ourMap
 }
 
 func checkLocation(ourMap [][]string, rowIndex int, columnIndex int) int {
