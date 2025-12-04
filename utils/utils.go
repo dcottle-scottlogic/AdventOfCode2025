@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -34,4 +35,17 @@ func ToInt(s string) int {
 		log.Fatalf("Could not convert string to int: %v", err)
 	}
 	return i
+}
+
+func Generate2DArray(path string, hight int) [][]string {
+	scanner := FileScanner(path)
+	result := make([][]string, hight)
+	rowIndex := 0
+	for scanner.Scan() {
+		line := strings.Split(scanner.Text(), "")
+		result[rowIndex] = line
+		rowIndex++
+	}
+	return result
+
 }
