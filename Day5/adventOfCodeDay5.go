@@ -71,11 +71,11 @@ func squashRanges(newRange [2]int, twoDArray [][2]int) (bool, [][2]int) {
 	merged := false
 
 	for _, existing := range twoDArray {
-		exisitingStartId := existing[0]
+		existingStartId := existing[0]
 		existingEndId := existing[1]
 
-		if !(end < exisitingStartId-1 || start > existingEndId+1) {
-			start = min(start, exisitingStartId)
+		if !(end < existingStartId-1 || start > existingEndId+1) {
+			start = min(start, existingStartId)
 			end = max(end, existingEndId)
 			merged = true
 		} else {
