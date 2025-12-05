@@ -33,7 +33,7 @@ func main() {
 	fmt.Printf("The result for part two is: %v", adventOfCodeDay4.Day4Main(false, adventOfCodeDay4.GetDay4Input(), 139))
 	fmt.Println("----------------------")
 	fmt.Println("Day 5 Solution:")
-	fmt.Printf("The result for part one is: %v", adventOfCodeDay5.Day5Main(true, adventOfCodeDay5.GetDay5Input()))
-	fmt.Printf("The result for part two is: %v", adventOfCodeDay5.Day5Main(false, adventOfCodeDay5.GetDay5Input()))
+	fmt.Printf("The result for part one is: %v", adventOfCodeDay5.Day5MainPart1(true, adventOfCodeDay5.GetDay5Input1(), adventOfCodeDay5.GetDay5Input2()))
+	fmt.Printf("The result for part two is: %v", adventOfCodeDay5.Day5MainPart2(adventOfCodeDay5.GetDay5Input2()))
 
 }
